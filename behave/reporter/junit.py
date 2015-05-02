@@ -95,14 +95,8 @@ class JUnitReporter(Reporter):
     show_tags      = True
 
     def make_feature_filename(self, feature):
-        filename = None
-        for path in self.config.paths:
-            if feature.filename.startswith(path):
-                filename = feature.filename[len(path) + 1:]
-                break
-        if not filename:
-            # -- NOTE: Directory path (subdirs) are taken into account.
-            filename = feature.location.relpath(self.config.base_dir)
+        # -- NOTE: Directory path (subdirs) are taken into account.
+        filename = feature.location.relpath(self.config.base_dir)
         filename = filename.rsplit('.', 1)[0]
         filename = filename.replace('\\', '/').replace('/', '.')
         return _text(filename)
